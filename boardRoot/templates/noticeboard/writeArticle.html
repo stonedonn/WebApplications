@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성</title>
+</head>
+<body>
+    <h1 style="text-align:center">새글 쓰기</h1>
+    <form name="articleForm" method="post">
+    {% csrf_token %}
+        <table border="0" align="center">
+            <tbody>
+                <tr>
+                    <td align="right">글제목:</td>
+                    <td colspan="2"><input type="text" size="71" maxlength="90" name="title"></td>
+                </tr>
+                <tr>
+                    <td align="right" valign="top"><br>글내용:</td>
+                    <td colspan="2"><textarea name="content" rows="10" cols="65" maxlength="1900"></textarea></td>
+                </tr>
+                <tr>
+                    <td align="right"></td>
+                    <td colspan="2">
+                        <input type="submit" value="글쓰기" />
+                        <input type="button" value="목록보기" onclick="backToList(this.form)" />
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>
