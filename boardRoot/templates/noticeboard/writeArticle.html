@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>글 작성</title>
+    <script>
+        function backToList(obj) {
+            obj.action="{% url 'noticeboard:index' %}";
+            obj.submit();
+        }
+    </script>
 </head>
 <body>
     <h1 style="text-align:center">새글 쓰기</h1>
-    <form name="articleForm" method="post">
+    <form name="articleForm" method="post" action="{% url 'noticeboard:add_article' %}">
     {% csrf_token %}
         <table border="0" align="center">
             <tbody>

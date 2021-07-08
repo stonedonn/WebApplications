@@ -1,3 +1,4 @@
+<!--템플릿은 사용자에게 보여지는 부분이다. 보여지는 부분!!-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +13,23 @@
             font-size: 30px;
             display: block;
         }
+        hr {
+            background-color: gray;
+            height: 20px;
+        }
+        h2 {
+            background-color: #828282;
+            padding: 30;
+        }
+
     </style>
 </head>
 <body>
-    <table align="center" border="1" width="80%">
+    <h2><b>자유게시판</b><span textalign="right" font-size="10px">BIT교육센터</span></h2>
+    <hr>
+    <table align="center" border="1">
         <thead>
-            <tr height="10", align="center" bgcolor="lightgreen">
+            <tr height="10", align="center" bgcolor="#dcdcdc">
                 <th>글번호</th>
                 <th>작성자</th>
                 <th>제목</th>
@@ -32,7 +44,7 @@
                 <td width="10%">{{article.writeID}}</td>
                 <td align="left" width="35%">
                     <span style="padding-right:30px"></span>
-                    <a class="cls1">{{article.title}}</a>
+                    <a class="cls1" href="{% url 'noticeboard:view' article.id %}">{{article.title}}</a>
                 </td>
                 <td width="10%">{{article.writeDate}}</td>
             </tr>
