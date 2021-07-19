@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>글보기</title>
+  <style>
+      #tr_btn_modify {
+        display:none;
+      }
+      #i_content {
+        text-align:left;
+      }
+    </style>
+  <script>
+    function backToList(obj) {
+      obj.action="{% url 'noticeboard:index' %}";
+      obj.submit();
+    }
+    function fn_enable(obj) {
+      let btn1 = document.querySelector("#tr_btn_modify");
+      let btn2 = document.querySelector("#tr_btn");
+      btn1.style.display="block";
+      btn2.style.display="none";
+      let title = document.querySelector("#i_title");
+      let content = document.querySelector("#i_content");
+      title.disabled=false;
+      content.disabled=false;
+    }
+    function fn_modify_article(obj) {
+      obj.action = "{% url 'noticeboard:update' article.id %}"
+      obj.submit();
+    }
+    function fn_remove_article(obj) {
+      obj.action = "{% url 'noticeboard:delete' article.id %}"
+      obj.submit();
+    }
+  </script>
+  <!--
+    보이게하고
+    수정하기세놈 안보이게하고
+    제목하고 내용 disable취소시켜주기
+  -->
+
+</head>
+<body>
+<form name="frmArticle" method="post">
+  {% csrf_token %} <!-- 장고에서 form 쓸 때는 꼭 써줘야함 -->
+  <table border="0" align="center">
+    <tbody>
+    <tr>
+      <td width="150" align="center" bgcolor="#FF9933">글번호</td>
+      <td><input type="text" value="{{article.id}}" disabled /></td> <!-- 수정못하게 막음 disabled-->
+    </tr>
+    <tr>
+      <td width="150" align="center" bgcolor="#FF9933">작성자 ID</td>
+      <td><input type="text" value="{{article.writeID}}" disabled /></td>
+    </tr>
+    <tr>
+      <td width="150" align="center" bgcolor="#FF9933">제목</td>
+      <td><input type="text" value="{{article.title}}" name="title" id="i_title" disabled /></td>
+    </tr>
+    <tr>
+      <td width="150" align="center" bgcolor="#FF9933">내용</td>
+      <td><textarea rows="20" cols="60" name="content" id="i_content" disabled>{{article.content}}</textarea></td>
+    </tr>
+    <tr>
+      <td width="20%" align="center" bgcolor="#FF9933">등록일자</td>
+      <td><input type="text" value="{{article.writeDate}}" disabled /></td>
+    </tr>
+    <tr id="tr_btn_modify">
+      <td colspan="2" align="center">
+        <input type="button" value="수정반영하기" onclick="fn_modify_article(frmArticle)" />
+        <input type="button" value="취소" onclick="backToList(frmArticle)" />
+      </td>
+    </tr>
+    <tr id="tr_btn">
+      <td colspan="2" align="center">
+        <input type="button" value="수정하기" onclick="fn_enable(this.form)" />
+        <input type="button" value="삭제하기" onclick="fn_remove_article(this.form)" />
+        <input type="button" value="리스트로 돌아가기" onclick="backToList(this.form)" />
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</form>
+</body>
+</html>
